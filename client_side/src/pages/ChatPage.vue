@@ -1,8 +1,21 @@
 <script>
+  import {mapState} from 'vuex'
+  import ChatUserList from './../components/chat/ChatUserList'
   export default{
     data () {
       return {
       }
+    },
+    components: {
+      'user-list': ChatUserList
+    },
+    computed: {
+      ...mapState({
+        chatStore: state => state.chatStore
+      })
+    },
+    created () {
+      this.$store.dispatch('setUserList')
     }
   }
 </script>
@@ -14,7 +27,7 @@
 
     <section class="content">
       <div class="col-md-2" id=user-list-col>
-        Load the user list
+        <user-list></user-list>
       </div>
       <div class="col-md-10" id=chat-content-wrapper>
         Show the chat content
